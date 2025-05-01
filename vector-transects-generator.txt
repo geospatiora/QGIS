@@ -1,0 +1,1 @@
+make_line((project($geometry, 300, radians("angle" + 90)), project($geometry, 300, radians("angle" - 90))))
