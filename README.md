@@ -34,6 +34,7 @@ qgis/
 │   └── test_scripts.py
 └── resources/
     └── color_palette.csv
+```
 
 Technologies Used
 QGIS (>= 3.x) – Open-source GIS software
