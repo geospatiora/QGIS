@@ -10,7 +10,7 @@ The goal of this repository is to:
 - Include example datasets for **training or experimentation**,
 - Promote **clean, modular, and reproducible** project organization.
 
-Project Structure
+# Project Structure
 
 ```plaintext
 qgis/
@@ -36,18 +36,14 @@ qgis/
     └── color_palette.csv
 ```
 
-Technologies Used
+# Technologies Used
 QGIS (>= 3.x) – Open-source GIS software
-
 PyQGIS – Python API embedded in QGIS
-
 Python 3.x
-
 Jupyter Notebook
+GeoPandas, Shapely, Fiona, GDAL/OGR (for external spatial processing)
 
-GeoPandas, Shapely, Fiona, GDAL/OGR (optional, for external spatial processing)
-
-Author
+# Author
 Sarah GIS & Geosptial
 GIS Engineer & Developer 
 [LinkedIn](https://www.linkedin.com/in/sarah-ortonovi/)
