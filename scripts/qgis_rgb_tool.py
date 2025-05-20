@@ -1,3 +1,15 @@
+"""
+Welcome!
+
+This Python script for QGIS automatically generates an RGB composite image from Sentinel-2 single-band files (Red, Green, Blue).
+It extracts the acquisition date from the filename, merges the bands into a single TIFF file, and adds the resulting composite to the QGIS project.
+
+Make sure the JP2 file paths are correctly set and that the Processing plugin is enabled in QGIS.
+
+Subscribe to my YT Channel for more QGIS Tutorials & Geospatial content!
+Link: https://www.youtube.com/@sarah-gis-geospatial
+"""
+
 import processing
 from qgis.core import QgsRasterLayer, QgsProject
 import re
