@@ -10,7 +10,7 @@ The goal of this repository is to:
 - Include example datasets for **training or experimentation**,
 - Promote **clean, modular, and reproducible** project organization.
 
-# Project Structure
+# Structure
 
 ```plaintext
 qgis/
@@ -37,7 +37,7 @@ qgis/
 ```
 
 # Technologies Used
-QGIS (>= 3.x) – Open-source GIS software
+QGIS (>= 3) – Open-source GIS software
 PyQGIS – Python API embedded in QGIS
 Python 3.x
 Jupyter Notebook
