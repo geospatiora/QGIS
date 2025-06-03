@@ -16,7 +16,7 @@ from PyQt5.QtWidgets import QInputDialog, QFileDialog
 # Step 1: Define parameters
 transects_name = "transects_300m"
 dem_name = "detrended_dem"
-spacing = 5  # meters between sample points
+spacing = 5
 
 # Step 2: Load QGIS layers
 transects_list = QgsProject.instance().mapLayersByName(transects_name)
@@ -42,20 +42,23 @@ if not ok:
 
 id_selected = int(id_selected)
 
-# Step 4: Create output points Layer
+# Step 4: Create output points Layer with X, Y, Z attributes
 out_fields = QgsFields()
 out_fields.append(QgsField("ID_LINE", QVariant.Int))
 out_fields.append(QgsField("DIST", QVariant.Double))
 out_fields.append(QgsField("Z", QVariant.Double))
+out_fields.append(QgsField("X", QVariant.Double))
+out_fields.append(QgsField("Y", QVariant.Double))
 
 mem_layer = QgsVectorLayer("Point?crs=" + crs.authid(), f"Transect_{id_selected}_Points", "memory")
-mem_layer.dataProvider().addAttributes(out_fields)
+mem_provider = mem_layer.dataProvider()
+mem_provider.addAttributes(out_fields)
 mem_layer.updateFields()
 
 d = QgsDistanceArea()
 d.setSourceCrs(crs, QgsProject.instance().transformContext())
 
-# Step 5: Store values for plottingg and CSV export
+# Step 5: Store values for plotting and CSV export
 graph_dist = []
 graph_elev = []
 csv_rows = []
@@ -74,30 +77,37 @@ for feat in transects.getFeatures(request):
         if elev is not None:
             f = QgsFeature()
             f.setGeometry(QgsGeometry.fromPointXY(QgsPointXY(pt)))
-            f.setAttributes([feat.id(), round(cur_dist, 2), round(elev, 2)])
-            mem_layer.dataProvider().addFeature(f)
+            attrs = [
+                feat.id(),
+                round(cur_dist, 2),
+                round(elev, 2),
+                pt.x(),
+                pt.y()
+            ]
+            f.setAttributes(attrs)
+            mem_provider.addFeature(f)
 
             graph_dist.append(cur_dist)
             graph_elev.append(elev)
-            csv_rows.append([feat.id(), round(cur_dist, 2), round(elev, 2)])
+            csv_rows.append(attrs)
 
         cur_dist += spacing
 
-# Step 7: Add layer
+mem_layer.updateExtents()
 QgsProject.instance().addMapLayer(mem_layer)
 
-# Step 8: Open a window to save your CSV file
+# Step 7: Open a window to save the CSV file
 csv_path, _ = QFileDialog.getSaveFileName(None, "Save CSV file", f"transect_{id_selected}_profile.csv", "CSV files (*.csv)")
 if csv_path:
     with open(csv_path, mode='w', newline='') as csvfile:
         writer = csv.writer(csvfile)
-        writer.writerow(["ID_LINE", "DIST", "Z"])
+        writer.writerow(["ID_LINE", "DIST", "Z", "X", "Y"])
         writer.writerows(csv_rows)
     print(f"CSV file saved to: {csv_path}")
 else:
     print("CSV export canceled.")
 
-# Step 9: Plot the profile
+# Step 8: Plot the profile
 plt.figure(figsize=(8, 4))
 plt.plot(graph_dist, graph_elev, color='darkorange', linewidth=2)
 plt.xlabel("Distance along transect (m)")
@@ -107,3 +117,4 @@ plt.title(f"Topographic Profile — Transect ID {id_selected}")
 plt.grid(True)
 plt.tight_layout()
 plt.show()
+
