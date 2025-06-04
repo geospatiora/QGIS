@@ -1,3 +1,5 @@
+# Export all the topographic profiles with this script in QGIS!
+
 import matplotlib.pyplot as plt
 from qgis.core import (
     QgsProject, QgsPointXY, QgsFeature, QgsFields, QgsField,
