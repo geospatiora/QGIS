@@ -23,9 +23,12 @@ qgis/
 │   ├── buildings.qml
 │   └── roads.qml
 ├── layouts/
-│   └── template_A4_portrait.qpt
+│   └── template_1.qpt
+│   └── template_2.qpt
 ├── data/
-│   └── municipalities.geojson
+│   └── bucket_1
+│   └── bucket_2
+│   └── bucket_3
 ├── notebooks/
 │   └── spatial_analysis.ipynb
 ├── docs/
