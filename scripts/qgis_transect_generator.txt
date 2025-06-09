@@ -1,6 +1,6 @@
 -----------------------------------------------------------------------------------------------------------------------------------
 # Video 1/2: How to create automatically transect vectors along a line:
-make_line((project($geometry, 300, radians("angle" + 90)), project($geometry, 300, radians("angle" - 90))))
+make_line(project($geometry, 300, radians("angle" + 90)), project($geometry, 300, radians("angle" - 90)))
 -----------------------------------------------------------------------------------------------------------------------------------
 # Video 2/2: The QGIS python script to extract the transects profiles
 - Method 1: With SAGA (Profiles from lines), see qgis_topoprofile_method_1.py
