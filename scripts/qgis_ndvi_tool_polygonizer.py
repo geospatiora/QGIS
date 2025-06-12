@@ -25,7 +25,7 @@ Ensure that you have the required libraries installed in your QGIS environment b
 
 Give it a try!
 
-My GIS YouTube Channel: https://www.youtube.com/@sarah-gis-geospatial
+My GIS YouTube Channel: https://www.youtube.com/@geospatiora
 """
 
 import os
