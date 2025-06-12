@@ -7,7 +7,7 @@ It extracts the acquisition date from the filename, merges the bands into a sing
 Make sure the JP2 file paths are correctly set and that the Processing plugin is enabled in QGIS.
 
 Subscribe to my YT Channel for more QGIS Tutorials & Geospatial content!
-Link: https://www.youtube.com/@sarah-gis-geospatial
+Link: https://www.youtube.com/@geospatiora
 """
 
 import processing
