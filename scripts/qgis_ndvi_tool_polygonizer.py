@@ -88,7 +88,7 @@ try:
 except Exception as e:
     print(f"Error during polygonization: {e}")
 
-# === 6. Filtering in QGIS (Removing polygons with values equal to 0) ===
+# 6. Filtering in QGIS (Removing polygons with values equal to 0)
 print("Removing polygons with values equal to 0...")
 try:
     # Load the vector layer
