@@ -1,1 +1,44 @@
+@echo off
+setlocal EnableDelayedExpansion
+
+set "SOURCE_DIR=E:\gis\dem\france\lidarhd\test\copc_files"
+set "OUTPUT_DIR=E:\gis\dem\france\lidarhd\test\geotiffs"
+
+REM Remplacer backslash par slash dans OUTPUT_DIR pour JSON
+set "OUTPUT_DIR_SLASH=%OUTPUT_DIR:\=/%" 
+
+mkdir "%OUTPUT_DIR%" 2>nul
+
+for %%f in (%SOURCE_DIR%\*.copc.laz) do (
+    echo Conversion de %%f...
+
+    set "FILEPATH=%%f"
+    set "FILEPATH=!FILEPATH:\=/!"
+
+    set "BASENAME=%%~nf"
+
+    > temp_pipeline.json echo {
+    >> temp_pipeline.json echo   "pipeline": [
+    >> temp_pipeline.json echo     "!FILEPATH!",
+    >> temp_pipeline.json echo     {
+    >> temp_pipeline.json echo       "type": "writers.gdal",
+    >> temp_pipeline.json echo       "filename": "!OUTPUT_DIR_SLASH!/!BASENAME!.tif",
+    >> temp_pipeline.json echo       "resolution": 1.0,
+    >> temp_pipeline.json echo       "output_type": "idw",
+    >> temp_pipeline.json echo       "radius": 1.5,
+    >> temp_pipeline.json echo       "data_type": "float32",
+    >> temp_pipeline.json echo       "gdaldriver": "GTiff"
+    >> temp_pipeline.json echo     }
+    >> temp_pipeline.json echo   ]
+    >> temp_pipeline.json echo }
+
+    REM Debug : afficher JSON généré
+    type temp_pipeline.json
+
+    pdal pipeline temp_pipeline.json
+)
+
+del temp_pipeline.json
+echo Conversion terminée.
+pause
 
