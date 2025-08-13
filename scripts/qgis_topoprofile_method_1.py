@@ -1,6 +1,5 @@
 # ---------------------------------------------------------------------------------------------------------
-# Link of the YouTube Video: [here]
-# Good luck! Subscribe: https://www.youtube.com/@sarah-gis-geospatial
+# Good luck! Subscribe: https://www.youtube.com/@geospatiora
 # ---------------------------------------------------------------------------------------------------------
 
 import csv
